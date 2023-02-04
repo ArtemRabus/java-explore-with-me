@@ -13,10 +13,10 @@ public interface StatRepository extends JpaRepository<EndpointHit, Integer> {
     List<EndpointHit> findAllByTimestampBetweenAndUriIn(LocalDateTime start, LocalDateTime end, String[] uris);
 
     @Query("SELECT count(ip) FROM EndpointHit " +
-            "WHERE uri = ?1")
+            "WHERE uri = :uri")
     Integer findHitCountByUri(String uri);
 
     @Query("SELECT count(DISTINCT ip) FROM EndpointHit " +
-            "WHERE uri = ?1")
+            "WHERE uri = :uri")
     Integer findHitCountByUriWithUniqueIp(String uri);
 }

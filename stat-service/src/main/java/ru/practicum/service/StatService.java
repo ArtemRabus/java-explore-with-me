@@ -26,7 +26,7 @@ public class StatService {
 
     public void save(EndpointHit endpointHit) {
         statRepository.save(endpointHit);
-        log.info("Информация о запросе к эндпоинту сохранена");
+        log.info("Information about the endpoint request is saved");
     }
 
     public List<ViewStats> findStat(String start, String end, String[] uris, Boolean unique) {
@@ -55,7 +55,7 @@ public class StatService {
                     .hits(hitCount).build());
         }
         viewStats.sort(Comparator.comparing(ViewStats::getHits).reversed());
-        log.info("Получена статистика по посещениям");
+        log.info("Received statistics on visits");
         return viewStats;
     }
 }
