@@ -13,9 +13,8 @@ import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -54,8 +53,12 @@ public class StatService {
                     .uri(hit.getUri())
                     .hits(hitCount).build());
         }
-        viewStats.sort(Comparator.comparing(ViewStats::getHits).reversed());
+        Set<String> uriSet = new HashSet<>();
+        List<ViewStats> viewStatsUnique = viewStats.stream()
+                .filter(e -> uriSet.add(e.getUri()))
+                .sorted(Comparator.comparing(ViewStats::getHits).reversed())
+                .collect(Collectors.toList());
         log.info("Received statistics on visits");
-        return viewStats;
+        return viewStatsUnique;
     }
 }
