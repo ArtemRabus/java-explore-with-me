@@ -9,14 +9,14 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
-public interface StatRepository extends JpaRepository<EndpointHit, Integer> {
+public interface StatRepository extends JpaRepository<EndpointHit, Long> {
     List<EndpointHit> findAllByTimestampBetweenAndUriIn(LocalDateTime start, LocalDateTime end, String[] uris);
 
     @Query("SELECT count(ip) FROM EndpointHit " +
             "WHERE uri = :uri")
-    Integer findHitCountByUri(String uri);
+    Long findHitCountByUri(String uri);
 
     @Query("SELECT count(DISTINCT ip) FROM EndpointHit " +
             "WHERE uri = :uri")
-    Integer findHitCountByUriWithUniqueIp(String uri);
+    Long findHitCountByUriWithUniqueIp(String uri);
 }

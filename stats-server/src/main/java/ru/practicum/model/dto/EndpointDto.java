@@ -1,23 +1,17 @@
-package ru.practicum.model;
+package ru.practicum.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "hits")
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class EndpointHit {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class EndpointDto {
     int id;
     String app;
     String uri;

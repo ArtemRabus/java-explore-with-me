@@ -2,11 +2,9 @@ package ru.practicum.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.model.EndpointHit;
-import ru.practicum.model.ViewStats;
+import ru.practicum.model.dto.EndpointDto;
+import ru.practicum.model.dto.ViewStats;
 import ru.practicum.service.StatService;
 
 import java.util.List;
@@ -15,13 +13,12 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class StatsController {
-    final StatService statService;
+    private final StatService statService;
 
     @PostMapping("/hit")
-    public ResponseEntity<HttpStatus> saveInfo(@RequestBody EndpointHit endpointHit) {
-        statService.save(endpointHit);
+    public EndpointDto saveInfo(@RequestBody EndpointDto endpointDto) {
         log.info("Save information that there was a request to the endpoints (StatsController)");
-        return ResponseEntity.ok().build();
+        return statService.save(endpointDto);
     }
 
     @GetMapping("/stats")
