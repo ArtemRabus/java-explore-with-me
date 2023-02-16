@@ -1,6 +1,8 @@
 package ru.practicum.event.common.controller;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -25,9 +27,10 @@ import static ru.practicum.utility.TimePattern.TIME_PATTERN;
 @RequestMapping("/events")
 @RequiredArgsConstructor
 @Slf4j
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class EventCommonController {
-    private final EventCommonService service;
-    private final StatsService statsService;
+    final EventCommonService service;
+    final StatsService statsService;
 
     @GetMapping("/{id}")
     public EventFullOutDto getById(@PathVariable Long id, HttpServletRequest request) {

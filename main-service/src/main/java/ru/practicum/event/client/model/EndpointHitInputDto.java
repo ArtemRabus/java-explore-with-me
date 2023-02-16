@@ -1,10 +1,8 @@
 package ru.practicum.event.client.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
 
@@ -14,11 +12,12 @@ import static ru.practicum.utility.TimePattern.TIME_PATTERN;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class EndpointHitInputDto {
-    private String app;
-    private String uri;
-    private String ip;
+    String app;
+    String uri;
+    String ip;
     @JsonFormat(pattern = TIME_PATTERN)
-    private LocalDateTime timestamp;
+    LocalDateTime timestamp;
 }
 

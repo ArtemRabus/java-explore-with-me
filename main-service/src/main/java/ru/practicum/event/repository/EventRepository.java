@@ -28,5 +28,4 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     @Query("select e from Event e where e.id = ?2 and e.initiator.id = ?1")
     Optional<Event> findAllByInitiatorIdAndId(Long userId, Long eventId);
 
-    Optional<Event> findByIdAndInitiatorId(Long eventId, Long userId);
 }

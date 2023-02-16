@@ -16,15 +16,15 @@ import static ru.practicum.utility.TimePattern.TIME_PATTERN;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UpdateEventRequest {
-    private String annotation;
-    private Long category;
-    private String description;
+    String annotation;
+    Long category;
+    String description;
     @JsonFormat(pattern = TIME_PATTERN)
-    private LocalDateTime eventDate;
-    private Location location;
-    private Boolean paid;
-    private Integer participantLimit;
-    private Boolean requestModeration;
-    private String title;
-    private StateActionAdmin stateAction;
+    LocalDateTime eventDate;
+    Location location;
+    Boolean paid;
+    Integer participantLimit;
+    Boolean requestModeration;
+    String title;
+    StateActionAdmin stateAction;
 }

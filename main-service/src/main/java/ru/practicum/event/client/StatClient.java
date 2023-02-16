@@ -10,7 +10,7 @@ import ru.practicum.event.client.model.ViewStatsEndpointDto;
 
 import java.util.List;
 
-@FeignClient(value = "stats-server", url = "${feign.url}")
+@FeignClient(value = "stats-server", url = "${stats-server.url}")
 public interface StatClient {
 
     @GetMapping("/stats?start={start}&end={end}&uris={uris}&unique={unique}")

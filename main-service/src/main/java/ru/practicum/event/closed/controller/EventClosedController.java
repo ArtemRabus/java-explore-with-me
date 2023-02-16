@@ -22,7 +22,6 @@ import java.util.Collection;
 @Slf4j
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
-@Validated
 public class EventClosedController {
     final EventClosedService service;
 

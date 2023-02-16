@@ -3,7 +3,6 @@ package ru.practicum.event.common.service;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -30,7 +29,6 @@ import static ru.practicum.enums.Status.CONFIRMED;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class EventCommonServiceImpl implements EventCommonService {
     final EventRepository eventRepository;

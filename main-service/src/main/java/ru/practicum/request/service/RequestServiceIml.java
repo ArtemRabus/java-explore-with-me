@@ -1,6 +1,8 @@
 package ru.practicum.request.service;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.enums.State;
@@ -22,11 +24,12 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class RequestServiceIml implements RequestService {
-    private final RequestRepository requestRepository;
-    private final RequestMapper requestMapper;
-    private final EventRepository eventRepository;
-    private final UserRepository userRepository;
+    final RequestRepository requestRepository;
+    final RequestMapper requestMapper;
+    final EventRepository eventRepository;
+    final UserRepository userRepository;
 
     @Override
     public Collection<ParticipationRequestDto> getUserRequests(Long userId) {

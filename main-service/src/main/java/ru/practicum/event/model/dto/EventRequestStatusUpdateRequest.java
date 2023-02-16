@@ -1,6 +1,7 @@
 package ru.practicum.event.model.dto;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.util.List;
 
@@ -9,7 +10,8 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class EventRequestStatusUpdateRequest {
-    private List<Long> requestIds;
-    private String status;
+    List<Long> requestIds;
+    String status;
 }

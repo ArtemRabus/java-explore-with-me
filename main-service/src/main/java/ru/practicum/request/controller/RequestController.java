@@ -1,6 +1,8 @@
 package ru.practicum.request.controller;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +15,9 @@ import java.util.Collection;
 @RequestMapping("users/{userId}/requests")
 @RequiredArgsConstructor
 @Slf4j
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class RequestController {
-    private final RequestService service;
+    final RequestService service;
 
     @GetMapping
     public Collection<ParticipationRequestDto> getUserRequests(@PathVariable Long userId) {

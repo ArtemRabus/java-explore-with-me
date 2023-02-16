@@ -1,6 +1,7 @@
 package ru.practicum.event.model;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 import ru.practicum.category.model.Category;
 import ru.practicum.enums.State;
 import ru.practicum.user.model.User;
@@ -13,41 +14,41 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@EqualsAndHashCode
 @Entity
 @Table(name = "events")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    Long id;
     @Column(name = "annotation",nullable = false)
-    private String annotation;
+    String annotation;
     @ManyToOne
     @JoinColumn(name = "category_id")
-    private Category category;
+    Category category;
     @Column(name = "created_on")
-    private LocalDateTime createdOn;
+    LocalDateTime createdOn;
     @ManyToOne
     @JoinColumn(name = "initiator_id")
-    private User initiator;
+    User initiator;
     @Column(name = "description")
-    private String description;
+    String description;
     @Column(name = "title",nullable = false)
-    private String title;
+    String title;
     @Column(name = "event_date",nullable = false)
-    private LocalDateTime eventDate;
+    LocalDateTime eventDate;
     @ManyToOne
     @JoinColumn(name = "location_id")
-    private Location location;
+    Location location;
     @Column(name = "paid",nullable = false)
-    private Boolean paid;
+    Boolean paid;
     @Column(name = "participant_limit")
-    private Integer participantLimit;
+    Integer participantLimit;
     @Column(name = "published_on")
-    private LocalDateTime publishedOn;
+    LocalDateTime publishedOn;
     @Column(name = "request_moderation")
-    private Boolean requestModeration;
+    Boolean requestModeration;
     @Enumerated(EnumType.STRING)
     @Column(name = "state")
-    private State state;
+    State state;
 }

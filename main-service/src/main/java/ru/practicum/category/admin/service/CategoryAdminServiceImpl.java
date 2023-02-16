@@ -3,7 +3,6 @@ package ru.practicum.category.admin.service;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,9 +15,7 @@ import ru.practicum.exception.model.ConflictException;
 import ru.practicum.exception.model.NotFoundException;
 
 @Service
-@Slf4j
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CategoryAdminServiceImpl implements CategoryAdminService {
     final CategoryRepository categoryRepository;

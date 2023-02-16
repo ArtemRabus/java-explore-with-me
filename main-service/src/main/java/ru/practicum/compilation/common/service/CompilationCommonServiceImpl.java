@@ -3,7 +3,6 @@ package ru.practicum.compilation.common.service;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.practicum.exception.model.NotFoundException;
@@ -15,7 +14,6 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 @Service
-@Slf4j
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CompilationCommonServiceImpl implements CompilationCommonService {

@@ -22,24 +22,24 @@ import static ru.practicum.utility.TimePattern.TIME_PATTERN;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class NewEventInDto {
-    private Long id;
+    Long id;
     @NotBlank(groups = {Create.class})
     @Size(max = 2000, min = 20)
-    private String annotation;
+    String annotation;
     @NotNull(groups = {Create.class})
-    private Long category;
+    Long category;
     @NotBlank(groups = {Create.class})
     @Size(max = 7000, min = 20)
-    private String description;
+    String description;
     @JsonFormat(pattern = TIME_PATTERN)
-    private LocalDateTime eventDate;
+    LocalDateTime eventDate;
     @NotNull(groups = {Create.class})
-    private Location location;
-    private boolean paid;
+    Location location;
+    boolean paid;
     @PositiveOrZero
-    private int participantLimit;
-    private boolean requestModeration;
+    int participantLimit;
+    boolean requestModeration;
     @NotBlank(groups = {Create.class})
     @Size(max = 120, min = 3)
-    private String title;
+    String title;
 }

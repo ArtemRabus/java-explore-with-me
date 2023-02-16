@@ -1,16 +1,15 @@
 package ru.practicum.event.client.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class ViewStatsEndpointDto {
-    private String app;
-    private String uri;
-    private Integer hits;
+    String app;
+    String uri;
+    Integer hits;
 }

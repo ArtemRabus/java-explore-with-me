@@ -15,9 +15,9 @@ import javax.persistence.*;
 public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    Long id;
     @Column(name = "lat",nullable = false)
-    private Float lat;
+    Float lat;
     @Column(name = "lon",nullable = false)
-    private Float lon;
+    Float lon;
 }

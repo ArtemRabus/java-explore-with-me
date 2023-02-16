@@ -40,13 +40,13 @@ import static ru.practicum.enums.Status.CONFIRMED;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Transactional(readOnly = true)
 public class EventClosedServiceImpl implements EventClosedService {
-    private final EventRepository eventRepository;
-    private final RequestRepository requestRepository;
-    private final RequestMapper requestMapper;
-    private final EventMapper mapper;
-    private final UserRepository userRepository;
-    private final CategoryRepository categoryRepository;
-    private final LocationRepository locationRepository;
+    final EventRepository eventRepository;
+    final RequestRepository requestRepository;
+    final RequestMapper requestMapper;
+    final EventMapper mapper;
+    final UserRepository userRepository;
+    final CategoryRepository categoryRepository;
+    final LocationRepository locationRepository;
 
     @Override
     @Transactional

@@ -3,7 +3,6 @@ package ru.practicum.category.common.service;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.practicum.category.model.dto.CategoryDto;
@@ -15,7 +14,6 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 @Service
-@Slf4j
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
 public class CategoryCommonServiceImpl implements CategoryCommonService {
