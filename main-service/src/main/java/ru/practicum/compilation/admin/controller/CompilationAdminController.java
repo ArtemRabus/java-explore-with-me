@@ -5,12 +5,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.compilation.admin.service.CompilationAdminService;
 import ru.practicum.compilation.model.dto.CompilationDto;
 import ru.practicum.compilation.model.dto.NewCompilationDto;
-import ru.practicum.utility.Create;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/admin/compilations")
@@ -22,7 +22,7 @@ public class CompilationAdminController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CompilationDto create(@RequestBody @Validated(Create.class) NewCompilationDto compilationDto) {
+    public CompilationDto create(@RequestBody @Valid NewCompilationDto compilationDto) {
         log.info("create new compilation: {}", compilationDto);
         return service.create(compilationDto);
     }
