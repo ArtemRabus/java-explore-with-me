@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface UserAdminService {
     UserOutDto createUser(UserOutDto userDto);
+
     Collection<UserOutDto> getUsers(List<Long> usersId, PageRequest pageRequest);
+
     void delete(Long id);
 }
