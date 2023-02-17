@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.exception.model.ConflictException;
 import ru.practicum.exception.model.NotFoundException;
 import ru.practicum.user.model.dto.UserOutDto;
@@ -35,7 +34,6 @@ public class UserAdminServiceImpl implements UserAdminService {
     }
 
     @Override
-    @Transactional
     public Collection<UserOutDto> getUsers(List<Long> usersId, PageRequest pageRequest) {
         return userRepository.findByIdIsIn(usersId, pageRequest)
                 .stream().map(UserMapper::fromUser).collect(Collectors.toList());

@@ -4,7 +4,6 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.enums.State;
 import ru.practicum.enums.Status;
 import ru.practicum.event.model.Event;
@@ -32,7 +31,6 @@ public class RequestServiceIml implements RequestService {
     final UserRepository userRepository;
 
     @Override
-    @Transactional
     public Collection<ParticipationRequestDto> getUserRequests(Long userId) {
         return requestRepository.findAllByRequesterId(userId).stream()
                 .map(requestMapper::fromRequest).collect(Collectors.toList());
@@ -65,7 +63,6 @@ public class RequestServiceIml implements RequestService {
     }
 
     @Override
-    @Transactional
     public ParticipationRequestDto cancel(Long userId, Long requestId) {
         Request request = requestRepository.findByIdAndRequesterId(requestId, userId).orElseThrow(() ->
                 new NotFoundException("request not found"));

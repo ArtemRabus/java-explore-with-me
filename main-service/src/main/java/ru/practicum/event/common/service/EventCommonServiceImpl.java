@@ -6,7 +6,6 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.enums.State;
 import ru.practicum.event.model.Event;
 import ru.practicum.event.model.dto.EventFullOutDto;
@@ -36,7 +35,6 @@ public class EventCommonServiceImpl implements EventCommonService {
     final EventMapper mapper;
 
     @Override
-    @Transactional
     public List<EventShortOutDto> getAll(String text, List<Long> categories,
                                       Boolean paid, LocalDateTime rangeStart, LocalDateTime rangeEnd,
                                       Boolean onlyAvailable, PageRequest pageRequest) {
@@ -75,7 +73,6 @@ public class EventCommonServiceImpl implements EventCommonService {
     }
 
     @Override
-    @Transactional
     public EventFullOutDto getById(Long id) {
         Event event = eventRepository.findById(id).orElseThrow(() ->
                 new NotFoundException("Event with id: " + id + " not found"));
