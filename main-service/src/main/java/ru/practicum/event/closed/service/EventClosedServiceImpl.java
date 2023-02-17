@@ -38,7 +38,6 @@ import static ru.practicum.enums.Status.CONFIRMED;
 @Slf4j
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Transactional(readOnly = true)
 public class EventClosedServiceImpl implements EventClosedService {
     final EventRepository eventRepository;
     final RequestRepository requestRepository;
