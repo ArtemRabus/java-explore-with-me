@@ -65,6 +65,7 @@ public class RequestServiceIml implements RequestService {
     }
 
     @Override
+    @Transactional
     public ParticipationRequestDto cancel(Long userId, Long requestId) {
         Request request = requestRepository.findByIdAndRequesterId(requestId, userId).orElseThrow(() ->
                 new NotFoundException("request not found"));

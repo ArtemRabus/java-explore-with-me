@@ -114,21 +114,18 @@ public class EventClosedServiceImpl implements EventClosedService {
     }
 
     @Override
-    @Transactional
     public Collection<EventFullOutDto> getByUser(Long userId, PageRequest pageRequest) {
         return eventRepository.findAllByInitiatorId(userId, pageRequest).stream()
                 .map(mapper::toEventFull).collect(Collectors.toList());
     }
 
     @Override
-    @Transactional
     public EventFullOutDto getByUserAndEvent(Long userId, Long eventId) {
         return mapper.toEventFull(eventRepository.findAllByInitiatorIdAndId(userId, eventId).orElseThrow(() ->
                 new NotFoundException("event with id: " + eventId + " not found")));
     }
 
     @Override
-    @Transactional
     public Collection<ParticipationRequestDto> getParticipationRequestsUser(Long userId, Long eventId) {
         return requestRepository.findAllByRequesterIdAndEventId(userId, eventId).stream()
                 .map(requestMapper::fromRequest).collect(Collectors.toList());
@@ -158,15 +155,15 @@ public class EventClosedServiceImpl implements EventClosedService {
 
     private EventRequestStatusUpdateResult confirmed(List<Request> requests, Event event) {
         EventRequestStatusUpdateResult result = new EventRequestStatusUpdateResult(new ArrayList<>(), new ArrayList<>());
+        if (event.getParticipantLimit() - requestRepository.findConfirmedRequests(event.getId(), CONFIRMED) <= 0) {
+            throw new ConflictException("event was max limit");
+        } else {
         for (Request request : requests) {
             try {
                 validRequestStatus(request);
             } catch (ConflictException e) {
                 continue;
             }
-            if (event.getParticipantLimit() - requestRepository.findConfirmedRequests(event.getId(), CONFIRMED) <= 0) {
-                throw new ConflictException("event was max limit");
-            } else {
                 request.setStatus(CONFIRMED);
                 request = requestRepository.save(request);
                 result.getConfirmedRequests().add(requestMapper.fromRequest(request));
