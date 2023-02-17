@@ -27,7 +27,6 @@ public class CompilationAdminServiceImpl implements CompilationAdminService {
     final CompilationMapper mapper;
 
     @Override
-    @Transactional
     public CompilationDto create(NewCompilationDto newCompilationDto) {
         if (compilationRepository.existsByTitle(newCompilationDto.getTitle())) {
             throw new ConflictException("Compilation with title: " + newCompilationDto.getTitle() + " already exist");
@@ -61,10 +60,7 @@ public class CompilationAdminServiceImpl implements CompilationAdminService {
     }
 
     @Override
-    @Transactional
     public void delete(Long id) {
-        compilationRepository.findById(id).orElseThrow(() ->
-                new NotFoundException("Compilation with id:" + id + " not found"));
         compilationRepository.deleteById(id);
     }
 }

@@ -15,7 +15,7 @@ public interface StatClient {
 
     @GetMapping("/stats?start={start}&end={end}&uris={uris}&unique={unique}")
     List<ViewStatsEndpointDto> getStats(@PathVariable String start, @PathVariable String end,
-                                        @PathVariable String[] uris, @PathVariable boolean unique);
+                                        @PathVariable List<String> uris, @PathVariable boolean unique);
 
     @PostMapping("/hit")
     void addToStat(@RequestBody EndpointHitInputDto endpointHitInputDto);

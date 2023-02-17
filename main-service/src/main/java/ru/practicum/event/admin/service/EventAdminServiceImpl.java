@@ -32,6 +32,7 @@ public class EventAdminServiceImpl implements EventAdminService {
     final LocationRepository locationRepository;
 
     @Override
+    @Transactional
     public List<EventFullOutDto> getAllByAdmin(List<Long> users, List<State> states, List<Long> categories,
                                                LocalDateTime rangeStart, LocalDateTime rangeEnd,
                                                PageRequest pageRequest) {

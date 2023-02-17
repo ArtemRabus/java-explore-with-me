@@ -26,7 +26,6 @@ public class UserAdminServiceImpl implements UserAdminService {
     final UserRepository userRepository;
 
     @Override
-    @Transactional
     public UserOutDto createUser(UserOutDto userDto) {
         try {
             return UserMapper.fromUser(userRepository.save(UserMapper.fromDtoToUser(userDto)));
@@ -36,13 +35,13 @@ public class UserAdminServiceImpl implements UserAdminService {
     }
 
     @Override
+    @Transactional
     public Collection<UserOutDto> getUsers(List<Long> usersId, PageRequest pageRequest) {
         return userRepository.findByIdIsIn(usersId, pageRequest)
                 .stream().map(UserMapper::fromUser).collect(Collectors.toList());
     }
 
     @Override
-    @Transactional
     public void delete(Long id) {
         userRepository.findById(id).orElseThrow(() ->
                 new NotFoundException("User with id: " + id + " not found"));

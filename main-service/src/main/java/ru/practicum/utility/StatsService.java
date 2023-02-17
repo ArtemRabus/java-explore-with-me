@@ -25,7 +25,7 @@ public class StatsService {
     public Long getViews(String uri) {
         String start = LocalDateTime.ofEpochSecond(0, 0, ZoneOffset.UTC).format(formatter);
         String end = LocalDateTime.now().plusYears(1000).format(formatter);
-        List<ViewStatsEndpointDto> listStats = client.getStats(start, end, new String[]{uri}, false);
+        List<ViewStatsEndpointDto> listStats = client.getStats(start, end, List.of(new String[]{uri}), false);
         if (listStats != null && listStats.size() > 0) {
             listStats = listStats.stream()
                     .filter(x -> APP_NAME.equals(x.getApp()))

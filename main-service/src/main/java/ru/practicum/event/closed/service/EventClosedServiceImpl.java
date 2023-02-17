@@ -49,7 +49,6 @@ public class EventClosedServiceImpl implements EventClosedService {
     final LocationRepository locationRepository;
 
     @Override
-    @Transactional
     public EventFullOutDto create(Long userId, NewEventInDto newEventDto) {
         if (newEventDto.getEventDate().isBefore(LocalDateTime.now().plusHours(2))) {
             throw new ConflictException("invalid event date");
@@ -115,18 +114,21 @@ public class EventClosedServiceImpl implements EventClosedService {
     }
 
     @Override
+    @Transactional
     public Collection<EventFullOutDto> getByUser(Long userId, PageRequest pageRequest) {
         return eventRepository.findAllByInitiatorId(userId, pageRequest).stream()
                 .map(mapper::toEventFull).collect(Collectors.toList());
     }
 
     @Override
+    @Transactional
     public EventFullOutDto getByUserAndEvent(Long userId, Long eventId) {
         return mapper.toEventFull(eventRepository.findAllByInitiatorIdAndId(userId, eventId).orElseThrow(() ->
                 new NotFoundException("event with id: " + eventId + " not found")));
     }
 
     @Override
+    @Transactional
     public Collection<ParticipationRequestDto> getParticipationRequestsUser(Long userId, Long eventId) {
         return requestRepository.findAllByRequesterIdAndEventId(userId, eventId).stream()
                 .map(requestMapper::fromRequest).collect(Collectors.toList());

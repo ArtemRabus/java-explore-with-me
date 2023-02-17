@@ -3,7 +3,6 @@ package ru.practicum.category.admin.service;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.category.model.Category;
@@ -21,7 +20,6 @@ public class CategoryAdminServiceImpl implements CategoryAdminService {
     final CategoryRepository categoryRepository;
 
     @Override
-    @Transactional
     public CategoryDto createCategory(NewCategoryDto categoryDto) {
         if (categoryRepository.existsByName(categoryDto.getName())) {
             throw new ConflictException("Category with name: " + categoryDto.getName() + " already exist");
@@ -42,12 +40,7 @@ public class CategoryAdminServiceImpl implements CategoryAdminService {
     }
 
     @Override
-    @Transactional
     public void deleteCategory(Long id) {
-        try {
             categoryRepository.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {
-            throw new NotFoundException("category with id: " + id + " not found");
-        }
     }
 }

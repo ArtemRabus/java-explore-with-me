@@ -32,13 +32,13 @@ public class RequestServiceIml implements RequestService {
     final UserRepository userRepository;
 
     @Override
+    @Transactional
     public Collection<ParticipationRequestDto> getUserRequests(Long userId) {
         return requestRepository.findAllByRequesterId(userId).stream()
                 .map(requestMapper::fromRequest).collect(Collectors.toList());
     }
 
     @Override
-    @Transactional
     public ParticipationRequestDto create(Long userId, Long eventId) {
         Event event = eventRepository.findById(eventId).orElseThrow(() -> {
             throw new NotFoundException("event with id:" + eventId + " not found");
@@ -65,7 +65,6 @@ public class RequestServiceIml implements RequestService {
     }
 
     @Override
-    @Transactional
     public ParticipationRequestDto cancel(Long userId, Long requestId) {
         Request request = requestRepository.findByIdAndRequesterId(requestId, userId).orElseThrow(() ->
                 new NotFoundException("request not found"));
