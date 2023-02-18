@@ -18,7 +18,8 @@ import ru.practicum.event.model.dto.*;
 import ru.practicum.event.model.mapper.EventMapper;
 import ru.practicum.event.repository.EventRepository;
 import ru.practicum.event.repository.LocationRepository;
-import ru.practicum.exception.model.*;
+import ru.practicum.exception.model.ConflictException;
+import ru.practicum.exception.model.NotFoundException;
 import ru.practicum.request.model.Request;
 import ru.practicum.request.model.dto.ParticipationRequestDto;
 import ru.practicum.request.model.mapper.RequestMapper;
@@ -160,12 +161,12 @@ public class EventClosedServiceImpl implements EventClosedService {
         for (Request request : requests) {
             try {
                 validRequestStatus(request);
-            } catch (ConflictException e) {
-                continue;
-            }
                 request.setStatus(CONFIRMED);
-                request = requestRepository.save(request);
                 result.getConfirmedRequests().add(requestMapper.fromRequest(request));
+                requestRepository.save(request);
+            } catch (ConflictException e) {
+                //ignore
+            }
             }
         }
         return result;
@@ -173,12 +174,14 @@ public class EventClosedServiceImpl implements EventClosedService {
 
     private EventRequestStatusUpdateResult reject(List<Request> requests) {
         EventRequestStatusUpdateResult result = new EventRequestStatusUpdateResult(new ArrayList<>(), new ArrayList<>());
-        for (Request request : requests) {
+        var rejectedList = new ArrayList<Request>();
+        requests.forEach(request -> {
             validRequestStatus(request);
             request.setStatus(Status.REJECTED);
-            request = requestRepository.save(request);
             result.getRejectedRequests().add(requestMapper.fromRequest(request));
-        }
+            rejectedList.add(request);
+        });
+        requestRepository.saveAll(rejectedList);
         return result;
     }
 
