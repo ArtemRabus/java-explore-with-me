@@ -3,7 +3,6 @@ package ru.practicum.event.closed.service;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,7 +35,6 @@ import java.util.stream.Collectors;
 import static ru.practicum.enums.Status.CONFIRMED;
 
 @Service
-@Slf4j
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class EventClosedServiceImpl implements EventClosedService {

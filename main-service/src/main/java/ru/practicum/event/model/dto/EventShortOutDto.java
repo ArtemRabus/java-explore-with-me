@@ -8,6 +8,7 @@ import ru.practicum.category.model.dto.CategoryDto;
 import ru.practicum.user.model.dto.UserShortDto;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import static ru.practicum.utility.TimePattern.TIME_PATTERN;
 
@@ -30,4 +31,7 @@ public class EventShortOutDto {
     Long views;
     @JsonIgnore
     Integer participantLimit;
+    Long ratings;
+    Set<UserShortDto> likes;
+    Set<UserShortDto> dislikes;
 }
