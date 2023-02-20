@@ -155,17 +155,12 @@ public class EventClosedServiceImpl implements EventClosedService {
         EventRequestStatusUpdateResult result = new EventRequestStatusUpdateResult(new ArrayList<>(), new ArrayList<>());
         if (event.getParticipantLimit() - requestRepository.findConfirmedRequests(event.getId(), CONFIRMED) <= 0) {
             throw new ConflictException("event was max limit");
-        } else {
+        }
         for (Request request : requests) {
-            try {
-                validRequestStatus(request);
-                request.setStatus(CONFIRMED);
-                result.getConfirmedRequests().add(requestMapper.fromRequest(request));
-                requestRepository.save(request);
-            } catch (ConflictException e) {
-                //ignore
-            }
-            }
+            validRequestStatus(request);
+            request.setStatus(CONFIRMED);
+            result.getConfirmedRequests().add(requestMapper.fromRequest(request));
+            requestRepository.save(request);
         }
         return result;
     }
