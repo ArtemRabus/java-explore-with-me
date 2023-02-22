@@ -54,7 +54,7 @@ public class RatingClosedController {
 
     @GetMapping("/dislike")
     public Collection<EventShortOutDto> getUserDislikes(@PathVariable Long userId) {
-        log.info("user with id {} get disliked event", userId);
+        log.info("user with id {} get disliked events", userId);
         return ratingClosedService.getUserDislikes(userId);
     }
 }

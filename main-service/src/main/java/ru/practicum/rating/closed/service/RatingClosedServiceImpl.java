@@ -41,7 +41,7 @@ public class RatingClosedServiceImpl implements RatingClosedService {
             userRepository.save(user);
             return eventMapper.toShortEvent(event);
         } else {
-            throw (new ConflictException("event not published"));
+            throw new ConflictException("event not published");
         }
     }
 
