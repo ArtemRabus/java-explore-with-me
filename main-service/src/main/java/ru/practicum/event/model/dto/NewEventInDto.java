@@ -20,6 +20,7 @@ import static ru.practicum.utility.TimePattern.TIME_PATTERN;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Builder
+@ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class NewEventInDto {
     Long id;

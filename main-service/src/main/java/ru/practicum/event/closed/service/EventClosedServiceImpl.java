@@ -3,7 +3,6 @@ package ru.practicum.event.closed.service;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,7 +35,6 @@ import java.util.stream.Collectors;
 import static ru.practicum.enums.Status.CONFIRMED;
 
 @Service
-@Slf4j
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class EventClosedServiceImpl implements EventClosedService {
@@ -157,17 +155,12 @@ public class EventClosedServiceImpl implements EventClosedService {
         EventRequestStatusUpdateResult result = new EventRequestStatusUpdateResult(new ArrayList<>(), new ArrayList<>());
         if (event.getParticipantLimit() - requestRepository.findConfirmedRequests(event.getId(), CONFIRMED) <= 0) {
             throw new ConflictException("event was max limit");
-        } else {
+        }
         for (Request request : requests) {
-            try {
-                validRequestStatus(request);
-                request.setStatus(CONFIRMED);
-                result.getConfirmedRequests().add(requestMapper.fromRequest(request));
-                requestRepository.save(request);
-            } catch (ConflictException e) {
-                //ignore
-            }
-            }
+            validRequestStatus(request);
+            request.setStatus(CONFIRMED);
+            result.getConfirmedRequests().add(requestMapper.fromRequest(request));
+            requestRepository.save(request);
         }
         return result;
     }

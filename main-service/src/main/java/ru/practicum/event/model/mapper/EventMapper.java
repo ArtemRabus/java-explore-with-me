@@ -17,6 +17,8 @@ import ru.practicum.user.model.mapper.UserMapper;
 import ru.practicum.utility.StatsService;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -35,11 +37,11 @@ public class EventMapper {
                 event.getState(), event.getTitle(), views);
     }
 
-    public Event toEvent(NewEventInDto newEventDto, Category category, User user, Location location) {
-        return new Event(newEventDto.getId(), newEventDto.getAnnotation(), category, LocalDateTime.now(),
-                user, newEventDto.getDescription(), newEventDto.getTitle(), newEventDto.getEventDate(),
-                location, newEventDto.isPaid(), newEventDto.getParticipantLimit(), LocalDateTime.now(), newEventDto.isRequestModeration(),
-                State.PENDING);
+    public Event toEvent(NewEventInDto newEventInDto, Category category, User user, Location location) {
+        return new Event(newEventInDto.getId(), newEventInDto.getAnnotation(), category, LocalDateTime.now(),
+                user, newEventInDto.getDescription(), newEventInDto.getTitle(), newEventInDto.getEventDate(),
+                location, newEventInDto.isPaid(), newEventInDto.getParticipantLimit(), LocalDateTime.now(), newEventInDto.isRequestModeration(),
+                State.PENDING, new HashSet<>(), new HashSet<>());
     }
 
     public EventShortOutDto toShortEvent(Event event) {
@@ -48,6 +50,7 @@ public class EventMapper {
         return new EventShortOutDto(event.getId(), event.getTitle(), event.getAnnotation(),
                 CategoryMapper.fromCategory(event.getCategory()), confirmed, event.getEventDate(),
                 UserMapper.fromUserToShortUser(event.getInitiator()), event.getPaid(),
-                views, event.getParticipantLimit());
+                views, event.getParticipantLimit(), (long) (event.getLikes().size() - event.getDislikes().size()), event.getLikes().stream().map(UserMapper::fromUserToShortUser).collect(Collectors.toSet()),
+                event.getDislikes().stream().map(UserMapper::fromUserToShortUser).collect(Collectors.toSet()));
     }
 }

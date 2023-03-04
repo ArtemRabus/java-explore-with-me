@@ -12,11 +12,10 @@ public class UserMapper {
     }
 
     public static UserShortDto fromUserToShortUser(User user) {
-        return new UserShortDto(user.getId(), user.getName());
+        return new UserShortDto(user.getId(), user.getName(), user.getRatings());
     }
 
     public static User fromDtoToUser(UserOutDto userDto) {
-        return new User(userDto.getId(), userDto.getName(), userDto.getEmail());
+        return new User(userDto.getId(), userDto.getName(), userDto.getEmail(), null, null, 0L);
     }
-
 }

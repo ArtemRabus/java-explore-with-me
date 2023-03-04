@@ -8,12 +8,12 @@ import ru.practicum.user.model.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Entity
 @Table(name = "events")
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -21,7 +21,7 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    @Column(name = "annotation",nullable = false)
+    @Column(name = "annotation", nullable = false)
     String annotation;
     @ManyToOne
     @JoinColumn(name = "category_id")
@@ -33,14 +33,14 @@ public class Event {
     User initiator;
     @Column(name = "description")
     String description;
-    @Column(name = "title",nullable = false)
+    @Column(name = "title", nullable = false)
     String title;
-    @Column(name = "event_date",nullable = false)
+    @Column(name = "event_date", nullable = false)
     LocalDateTime eventDate;
     @ManyToOne
     @JoinColumn(name = "location_id")
     Location location;
-    @Column(name = "paid",nullable = false)
+    @Column(name = "paid", nullable = false)
     Boolean paid;
     @Column(name = "participant_limit")
     Integer participantLimit;
@@ -51,4 +51,8 @@ public class Event {
     @Enumerated(EnumType.STRING)
     @Column(name = "state")
     State state;
+    @ManyToMany(mappedBy = "likedEvents")
+    Set<User> likes;
+    @ManyToMany(mappedBy = "dislikedEvents")
+    Set<User> dislikes;
 }
