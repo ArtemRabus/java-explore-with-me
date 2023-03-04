@@ -23,7 +23,7 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiError handle(final MethodArgumentNotValidException e) {
+    public ApiError manage(final MethodArgumentNotValidException e) {
         log.warn(Objects.requireNonNull(e.getFieldError()).getDefaultMessage());
         return new ApiError(Objects.requireNonNull(e.getFieldError()).getDefaultMessage(),
                 HttpStatus.BAD_REQUEST.getReasonPhrase(),
@@ -33,7 +33,7 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiError handle(final MissingServletRequestParameterException e) {
+    public ApiError manage(final MissingServletRequestParameterException e) {
         log.warn(e.getMessage());
         return new ApiError(e.getMessage(),
                 HttpStatus.BAD_REQUEST.getReasonPhrase(),
@@ -43,7 +43,7 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiError handle(final ConstraintViolationException e) {
+    public ApiError manage(final ConstraintViolationException e) {
         log.warn(e.getMessage());
         return new ApiError(e.getMessage(),
                 HttpStatus.BAD_REQUEST.getReasonPhrase(),
@@ -53,7 +53,7 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiError handle(final IllegalArgumentException e) {
+    public ApiError manage(final IllegalArgumentException e) {
         log.warn(e.getMessage());
         return new ApiError(e.getMessage(),
                 HttpStatus.BAD_REQUEST.getReasonPhrase(),
@@ -63,7 +63,7 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.CONFLICT)
-    public ApiError handle(final ConflictException e) {
+    public ApiError manage(final ConflictException e) {
         log.warn(e.getMessage());
         return new ApiError(e.getMessage(),
                 HttpStatus.CONFLICT.getReasonPhrase(),
@@ -73,7 +73,7 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ApiError handle(final NotFoundException e) {
+    public ApiError manage(final NotFoundException e) {
         log.warn(e.getMessage());
         return new ApiError(e.getMessage(),
                 HttpStatus.NOT_FOUND.getReasonPhrase(),
@@ -83,7 +83,7 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiError handle(final ValidException e) {
+    public ApiError manage(final ValidException e) {
         log.warn(e.getMessage());
         return new ApiError(e.getMessage(),
                 HttpStatus.BAD_REQUEST.getReasonPhrase(),
@@ -93,7 +93,7 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.CONFLICT)
-    public ApiError handle(HttpMessageNotReadableException e) {
+    public ApiError manage(HttpMessageNotReadableException e) {
         log.warn(e.getMessage());
         return new ApiError(e.getMessage(),
                 HttpStatus.CONFLICT.getReasonPhrase(),
@@ -103,7 +103,7 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.CONFLICT)
-    public ApiError handle(DataIntegrityViolationException e) {
+    public ApiError manage(DataIntegrityViolationException e) {
         log.warn(e.getMessage());
         return new ApiError(e.getMessage(),
                 HttpStatus.CONFLICT.getReasonPhrase(),
@@ -113,7 +113,7 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ApiError handle(Throwable e) {
+    public ApiError manage(Throwable e) {
         log.warn(e.getMessage());
         return new ApiError(e.getMessage(),
                 HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(),

@@ -7,7 +7,7 @@ import ru.practicum.user.model.dto.UserShortDto;
 import java.util.List;
 
 public interface RatingCommonService {
-    List<EventShortOutDto> getMostPopularEvents(int from, int size);
+    List<EventShortOutDto> getPopularEvents(int from, int size);
 
-    List<UserShortDto> getMostPopularEventsInit(PageRequest pageRequest);
+    List<UserShortDto> getPopularUsers(PageRequest pageRequest);
 }

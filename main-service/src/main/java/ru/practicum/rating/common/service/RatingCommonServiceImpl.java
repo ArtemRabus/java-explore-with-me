@@ -26,14 +26,14 @@ public class RatingCommonServiceImpl implements RatingCommonService {
     final EventMapper eventMapper;
 
     @Override
-    public List<EventShortOutDto> getMostPopularEvents(int from, int size) {
+    public List<EventShortOutDto> getPopularEvents(int from, int size) {
         return eventRepository.findAllByState(State.PUBLISHED, PageRequest.of(from, size)).stream()
                 .map(eventMapper::toShortEvent).sorted(Comparator.comparingLong(EventShortOutDto::getRatings).reversed())
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<UserShortDto> getMostPopularEventsInit(PageRequest pageRequest) {
+    public List<UserShortDto> getPopularUsers(PageRequest pageRequest) {
         return userRepository.findAllSortByOrderByRatingsDesc(pageRequest).stream()
                 .map(UserMapper::fromUserToShortUser).collect(Collectors.toList());
     }

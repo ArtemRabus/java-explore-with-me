@@ -29,14 +29,14 @@ public class RatingCommonController {
     public Collection<UserShortDto> getPopularUsers(
             @PositiveOrZero @RequestParam(defaultValue = "0") int from,
             @Positive @RequestParam(defaultValue = "10") int size) {
-        log.info("public get popular users, param: from: {}, size: {}", from, size);
-        return ratingCommonService.getMostPopularEventsInit(PageRequest.of(from, size));
+        log.info("get popular users: from: {}, size: {}", from, size);
+        return ratingCommonService.getPopularUsers(PageRequest.of(from, size));
     }
 
     @GetMapping("/events")
     public Collection<EventShortOutDto> getPopularEvents(@PositiveOrZero @RequestParam(defaultValue = "0") int from,
                                                          @Positive @RequestParam(defaultValue = "10") int size) {
-        log.info("public get popular events, param: from: {}, size: {}", from, size);
-        return ratingCommonService.getMostPopularEvents(from, size);
+        log.info("get popular events: from: {}, size: {}", from, size);
+        return ratingCommonService.getPopularEvents(from, size);
     }
 }

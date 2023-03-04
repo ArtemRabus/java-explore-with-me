@@ -31,13 +31,13 @@ public class RatingClosedServiceImpl implements RatingClosedService {
         Event event = getEvent(eventId);
         if (event.getState().equals(State.PUBLISHED)) {
             if (event.getLikes().contains(user)) {
-                throw new ConflictException("User already like this event");
+                throw new ConflictException("the user already like this event");
             }
             user.getDislikedEvents().remove(event);
             user.getLikedEvents().add(event);
             event.getDislikes().remove(user);
             event.getLikes().add(user);
-            incrementUserRating(event.getInitiator());
+            increaseUserRating(event.getInitiator());
             userRepository.save(user);
             return eventMapper.toShortEvent(event);
         } else {
@@ -50,7 +50,7 @@ public class RatingClosedServiceImpl implements RatingClosedService {
         User user = getUser(userId);
         Event event = getEvent(eventId);
         user.getLikedEvents().remove(event);
-        decrementUserRating(event.getInitiator());
+        decreaseUserRating(event.getInitiator());
         userRepository.save(user);
     }
 
@@ -60,13 +60,13 @@ public class RatingClosedServiceImpl implements RatingClosedService {
         Event event = getEvent(eventId);
         if (event.getState().equals(State.PUBLISHED)) {
             if (event.getDislikes().contains(user)) {
-                throw new ConflictException("user already dislike this event");
+                throw new ConflictException("the user already dislike this event");
             }
             event.getLikes().remove(user);
             event.getDislikes().add(user);
             user.getLikedEvents().remove(event);
             user.getDislikedEvents().add(event);
-            decrementUserRating(event.getInitiator());
+            decreaseUserRating(event.getInitiator());
             userRepository.save(user);
             return eventMapper.toShortEvent(event);
         } else {
@@ -79,7 +79,7 @@ public class RatingClosedServiceImpl implements RatingClosedService {
         User user = getUser(userId);
         Event event = getEvent(eventId);
         user.getDislikedEvents().remove(event);
-        incrementUserRating(event.getInitiator());
+        increaseUserRating(event.getInitiator());
         userRepository.save(user);
     }
 
@@ -95,12 +95,12 @@ public class RatingClosedServiceImpl implements RatingClosedService {
         return user.getDislikedEvents().stream().map(eventMapper::toShortEvent).collect(Collectors.toList());
     }
 
-    private void incrementUserRating(User initiator) {
+    private void increaseUserRating(User initiator) {
         initiator.setRatings(initiator.getRatings() + 1);
         userRepository.save(initiator);
     }
 
-    private void decrementUserRating(User initiator) {
+    private void decreaseUserRating(User initiator) {
         initiator.setRatings(initiator.getRatings() - 1);
         userRepository.save(initiator);
     }
